@@ -9,7 +9,7 @@
 //     blue: "#2979ff",
 //   },
 
-import Photo from "./components/useEffect/Photo";
+import Info from "./components/info/Info";
 
 // };
 function App() {
@@ -21,7 +21,7 @@ function App() {
     //     <CardTailwind></CardTailwind>
     //   </CardList>
     <div>
-      <Photo></Photo>
+      <Info></Info>
     </div>
   );
 }

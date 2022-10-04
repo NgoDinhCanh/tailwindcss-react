@@ -1,45 +1,14 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useRef } from "react";
+import React, { useState } from "react";
+import useHackerNewsWithHook from "../../hooks/useHackerNewsWithHook";
 // import lodash from "lodash";
 
 //https://hn.algolia.com/api/v1/search?query=react
-const HackerNews = () => {
-  const [hits, setHits] = useState([]);
-  const [query, setQuery] = useState("react");
-  const [loading, setLoading] = useState(true);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [url, setUrl] = useState(
-    `https://hn.algolia.com/api/v1/search?query=${query}`
+const HackerNewsWithHook = () => {
+  const [query, setQuery] = useState("css");
+  const { data, loading, errorMessage, setUrl } = useHackerNewsWithHook(
+    `https://hn.algolia.com/api/v1/search?query=${query}`,
+    { hits: [] }
   );
-  const isMounted = useRef(true);
-
-  useEffect(() => {
-    return () => {
-      isMounted.current = false;
-    };
-  });
-  const handleFetchData = useRef({});
-  handleFetchData.current = async () => {
-    try {
-      setLoading(true);
-      const response = await axios.get(url);
-      setTimeout(() => {
-        if (isMounted.current) {
-          console.log(response);
-          setHits(response.data?.hits || []);
-          setLoading(false);
-        }
-      }, 3000);
-    } catch (error) {
-      setLoading(false);
-      setErrorMessage(`The error happened: ${error}`);
-    }
-  };
-  useEffect(() => {
-    handleFetchData.current();
-  }, [url]);
-
   return (
     <div className="bg-white mx-auto mt-5 mb-5 p-5 rounded-lg shadow-md w-2/4">
       <div className="flex mb-5 gap-x-2">
@@ -68,8 +37,8 @@ const HackerNews = () => {
       )}
       <div className="flex flex-wrap gap-5">
         {!loading &&
-          hits.length > 0 &&
-          hits.map((item, index) => {
+          data.hits?.length > 0 &&
+          data.hits?.map((item, index) => {
             if (!item.title || item.title.length <= 0) return null;
             return (
               <h3 className="p-3 bg-gray-100 rounded-md" key={index}>
@@ -82,4 +51,4 @@ const HackerNews = () => {
   );
 };
 
-export default HackerNews;
+export default HackerNewsWithHook;

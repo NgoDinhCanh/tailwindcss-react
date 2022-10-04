@@ -9,10 +9,13 @@
 //     blue: "#2979ff",
 //   },
 
+// import { useState } from "react";
 import Dropdown from "./components/dropdown/Dropdown";
+// import HackerNewsWithHook from "./components/news/HackerNewsWithHook";
 
 // };
 function App() {
+  // const [show, setShow] = useState(false);
   return (
     // <ThemeProvider theme={theme}>
     // </ThemeProvider>
@@ -21,6 +24,8 @@ function App() {
     //     <CardTailwind></CardTailwind>
     //   </CardList>
     <div className="p-5">
+      {/* <button onClick={() => setShow(!show)}>Toggle Button</button>
+      {show && <HackerNewsWithHook></HackerNewsWithHook>} */}
       <Dropdown></Dropdown>
     </div>
   );

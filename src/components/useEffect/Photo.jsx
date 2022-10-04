@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import CardTailwind from "../card/CardTailwind";
 
@@ -19,14 +19,15 @@ const getPhotos = async (page) => {
 const Photo = () => {
   const [randomPhotos, setRandomPhotos] = useState([]);
   const [nextPage, setNextPage] = useState(1);
-  const handelLoadMore = async () => {
+  const handelLoadMore = useRef({});
+  handelLoadMore.current = async () => {
     const images = await getPhotos(nextPage);
     const newPhotos = [...randomPhotos, ...images];
     setRandomPhotos(newPhotos);
     setNextPage(nextPage + 1);
   };
   useEffect(() => {
-    handelLoadMore();
+    handelLoadMore.current();
   }, []);
   return (
     <div>
@@ -43,7 +44,7 @@ const Photo = () => {
       <div className="text-center mt-8">
         <button
           className="inline-block px-8 py-4 bg-purple-400 text-white"
-          onClick={handelLoadMore}
+          onClick={handelLoadMore.current}
         >
           Load more
         </button>

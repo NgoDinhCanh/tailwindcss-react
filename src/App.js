@@ -9,7 +9,7 @@
 //     blue: "#2979ff",
 //   },
 
-import Info from "./components/info/Info";
+import Dropdown from "./components/dropdown/Dropdown";
 
 // };
 function App() {
@@ -20,8 +20,8 @@ function App() {
     // <CardList>
     //     <CardTailwind></CardTailwind>
     //   </CardList>
-    <div>
-      <Info></Info>
+    <div className="p-5">
+      <Dropdown></Dropdown>
     </div>
   );
 }

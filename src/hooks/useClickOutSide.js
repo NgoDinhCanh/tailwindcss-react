@@ -1,23 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 
-export default function useClickOutSide() {
+export default function useClickOutSide(dom = "button") {
   const [show, setShow] = useState(false);
   const nodeRef = useRef(null);
   useEffect(() => {
     const handleClick = (e) => {
-      console.log(nodeRef.current.contains(e.target));
-      if (nodeRef.current && !nodeRef.current.contains(e.target)) {
-        console.log("side");
+      if (
+        nodeRef.current &&
+        !nodeRef.current.contains(e.target) &&
+        !e.target.matches(dom)
+      ) {
         setShow(false);
       } else {
-        console.log("inside");
       }
     };
     document.addEventListener("click", handleClick);
     return () => {
       document.removeEventListener("click", handleClick);
     };
-  }, []);
+  }, [dom]);
   return {
     show,
     setShow,

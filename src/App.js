@@ -1,9 +1,9 @@
-import MovieSearchApp from "./components/MovieSearchApp";
+import SignUpForm from "./components/form/SignUpForm";
 
 function App() {
   return (
     <div>
-      <MovieSearchApp></MovieSearchApp>
+      <SignUpForm></SignUpForm>
     </div>
   );
 }
